@@ -1,0 +1,48 @@
+/*
+	Copyright Myles Trevino
+	Licensed under the Apache License, Version 2.0
+	http://www.apache.org/licenses/LICENSE-2.0
+*/
+
+
+#statistics-graph
+{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: calc(100vh - var(--titlebar-height) - var(--medium-gap) * 2);
+	margin: var(--medium-gap);
+}
+
+
+:host ::ng-deep
+{
+	/* Lines. */
+	path
+	{
+		stroke-width: var(--line-width);
+		fill: none;
+	}
+
+	.statistics-errors-line { stroke: var(--bad-color); }
+	.statistics-wpm-line { stroke: var(--good-color); }
+
+	/* Points. */
+	circle { opacity: 0.5; }
+
+	.statistics-errors-point { fill: var(--bad-color); }
+	.statistics-wpm-point { fill: var(--good-color); }
+
+	/* Tooltip. */
+	.statistics-tooltip
+	{
+		pointer-events: none;
+		position: fixed;
+		padding: 0 0.5rem;
+		border-radius: 0.5rem;
+		font-size: 1rem;
+		white-space: nowrap;
+		background-color: var(--alternate-color);
+		transform: translateX(-50%) translateY(-2.5rem);
+	}
+}

@@ -1,0 +1,44 @@
+<!--
+	Copyright Myles Trevino
+	Licensed under the Apache License, Version 2.0
+	http://www.apache.org/licenses/LICENSE-2.0
+-->
+
+
+<!-- Keys. -->
+<div id="practice-keys-container">
+	<div *ngFor="let keyTiming of state.averageKeyTimings | keyvalue; trackBy: keysTrackBy" class="practice-key">
+		<div class="practice-key-color" [ngStyle]="{'opacity': keyTiming.value ? math.log(keyTiming.value)+1 : 0}" [ngClass]="{'practice-focus-key': keyTiming.key === state.focusKey}"></div>
+		<span>{{keyTiming.key.toUpperCase()}}</span>
+	</div>
+</div>
+
+<!-- Status bar. -->
+<div id="practice-status-bar">
+
+	<!-- Speed. -->
+	<div class="pill">
+		<span>Speed</span>
+		<span [ngClass]="{'better': averageWpmDelta > 0, 'worse': averageWpmDelta < 0}">{{state.averageWpm.toFixed(2)}}</span>
+	</div>
+
+	<!-- Focus. -->
+	<div class="pill">
+		<span>Focus</span>
+		<span>{{state.focusKey ? state.focusKey.toUpperCase() : '-'}}</span>
+	</div>
+
+	<!-- Errors. -->
+	<div class="pill">
+		<span>Errors</span>
+		<span [ngClass]="{'better': averageErrorsDelta < 0, 'worse': averageErrorsDelta > 0}">{{state.averageErrors.toFixed(2)}}</span>
+	</div>
+</div>
+
+<!-- Text. -->
+<div id="practice-text-container">
+	<span *ngFor="let character of characters" [ngClass]="{'practice-character': true, 'practice-character-current': character.current, 'practice-character-typed': character.typed, 'practice-character-wrong': character.wrong}">{{character.character}}</span>
+</div>
+
+<!-- Current WPM. -->
+<span id="practice-bottom-status">S {{wpm}} | E {{errors}}</span>

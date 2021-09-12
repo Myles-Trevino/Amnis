@@ -1,0 +1,30 @@
+<!--
+	Copyright Myles Trevino
+	Licensed under the Apache License, Version 2.0
+	http://www.apache.org/licenses/LICENSE-2.0
+-->
+
+
+<!-- Titlebar. -->
+<div id="amnis-titlebar-container">
+	<div id="amnis-titlebar">
+
+		<!-- Navigation. -->
+		<div id="amnis-navigation-buttons" class="amnis-titlebar-buttons">
+			<a routerLink="/practice" (click)="setPage('Practice')" [ngClass]="{dimmed: page !== 'Practice'}">Practice</a>
+			<a routerLink="/statistics" (click)="setPage('Statistics')" [ngClass]="{dimmed: page !== 'Statistics'}">Statistics</a>
+			<a routerLink="/options" (click)="setPage('Options')" [ngClass]="{dimmed: page !== 'Options'}">Options</a>
+		</div>
+
+		<!-- Window controls. -->
+		<div id="amnis-window-control-buttons" class="amnis-titlebar-buttons">
+			<div class="amnis-window-control" (click)="minimize()"></div>
+			<div class="amnis-window-control" (click)="close()"></div>
+		</div>
+
+	</div>
+</div>
+
+
+<!-- Page. -->
+<router-outlet></router-outlet>

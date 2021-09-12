@@ -1,0 +1,139 @@
+/*
+	Copyright Myles Trevino
+	Licensed under the Apache License, Version 2.0
+	http://www.apache.org/licenses/LICENSE-2.0
+*/
+
+
+/* Variables. */
+:root
+{
+	/* Sizes. */
+	--line-width: 0.1075rem;
+	--large-line-width: 0.18rem;
+	--button-height: 2rem;
+
+	--large-gap: 3.75rem;
+	--medium-gap: 2.5rem;
+	--small-gap: 1rem;
+
+	--medium-radius: 1.5rem;
+	--small-radius: 0.5rem;
+
+	--titlebar-height: 2rem;
+	--titlebar-button-diameter: 1rem;
+	--resize-region-size: 5px;
+
+	/* Durations. */
+	--regular-transition-duration: 0.16s;
+	--medium-transition-duration: 0.32s;
+	--long-transition-duration: 0.64s;
+
+	/* Colors. */
+	--main-color: rgb(0, 9, 19);
+	--alternate-color: rgb(17, 31, 47);
+	--text-color: rgb(178, 206, 236);
+	--semitransparent-text-color: rgb(178, 206, 236, 0.333);
+	--accent-color: rgb(69, 102, 138);
+
+	--good-color: rgb(130, 255, 85);
+	--bad-color: rgb(255, 48, 65);
+}
+
+
+/* Fonts. */
+@font-face
+{
+	font-family: "Roboto Regular";
+	src: url("assets/fonts/roboto-regular.ttf");
+}
+
+@font-face
+{
+	font-family: "Iosevka SS08 Medium";
+	src: url("assets/fonts/iosevka-ss08-medium.ttf");
+}
+
+
+/* Text elements. */
+span, a, div, button, input
+{
+	font-family: "Roboto Regular";
+	letter-spacing: -0.01rem;
+	color: var(--text-color);
+	font-size: 1.1rem;
+	line-height: 1.75rem;
+}
+
+a
+{
+	text-decoration-color: var(--semitransparent-text-color);
+	transition: text-decoration-color var(--regular-transition-duration);
+
+	&:hover { text-decoration-color: var(--text-color); }
+}
+
+
+/* General. */
+*
+{
+	-webkit-tap-highlight-color: transparent;
+	-webkit-appearance: none;
+	user-select: none;
+	box-sizing: border-box;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	outline: none;
+}
+
+html { background-color: var(--main-color); }
+
+input, button
+{
+	height: var(--button-height);
+	padding: 0 calc(var(--button-height) / 2);
+	border-radius: calc(var(--button-height) / 2);
+	background-color: var(--main-color);
+}
+
+button
+{
+	cursor: pointer;
+	transition: background-color var(--regular-transition-duration);
+
+	&:hover { background-color: var(--accent-color); }
+}
+
+
+/* Animations. */
+.better { animation: better-animation 2s forwards; }
+.worse { animation: worse-animation 2s forwards; }
+
+@keyframes better-animation
+{
+	from { color: var(--good-color); }
+	to { color: var(--text-color); }
+}
+
+@keyframes worse-animation
+{
+	from { color: var(--bad-color); }
+	to { color: var(--text-color); }
+}
+
+
+/* Classes. */
+.dimmed { opacity: 0.5; }
+
+.pill
+{
+	display: grid;
+	grid-auto-flow: column;
+	grid-gap: var(--small-gap);
+	align-items: center;
+	height: var(--button-height);
+	padding: 0 1rem;
+	border-radius: calc(var(--button-height) / 2);
+	background-color: var(--alternate-color);
+}

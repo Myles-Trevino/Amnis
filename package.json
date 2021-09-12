@@ -1,0 +1,85 @@
+{
+	"author": {
+		"name": "Laventh",
+		"email": "support@laventh.com"
+	},
+	"name": "amnis",
+	"productName": "Amnis",
+	"version": "1.0.0",
+	"description": "Improve your typing skills.",
+	"license": "Apache-2.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Myles-Trevino/Amnis"
+	},
+	"main": "source/electron.js",
+	"private": true,
+	"scripts": {
+		"ng": "ng",
+		"build": "ng build --base-href ./",
+		"build-debug": "ng build --configuration development --base-href ./",
+		"start": "electron source/electron.js",
+		"release": "electron-builder --publish never",
+		"lint": "ng lint"
+	},
+	"build": {
+		"appId": "com.laventh.amnis",
+		"artifactName": "${productName} ${version}.${ext}",
+		"directories": {
+			"output": "build/release",
+			"buildResources": "release_resources"
+		},
+		"nsis": {
+			"oneClick": false,
+			"perMachine": true,
+			"uninstallDisplayName": "${productName}",
+			"createDesktopShortcut": "always"
+		},
+		"mac": {
+			"target": "pkg"
+		},
+		"linux": {
+			"target": "deb"
+		},
+		"deb": {
+			"synopsis": "Improve your typing skills.",
+			"description": "Amnis helps you improve your typing skills using a simple learning algorithm, a large dictionary of common words, and metrics to track your progress."
+		}
+	},
+	"dependencies": {
+		"@angular/animations": "~12.2.0",
+		"@angular/common": "~12.2.0",
+		"@angular/compiler": "~12.2.0",
+		"@angular/core": "~12.2.0",
+		"@angular/forms": "~12.2.0",
+		"@angular/platform-browser": "~12.2.0",
+		"@angular/platform-browser-dynamic": "~12.2.0",
+		"@angular/router": "~12.2.0",
+		"d3": "^7.0.1",
+		"ngx-electron": "^2.2.0",
+		"rxjs": "~6.6.0",
+		"tslib": "^2.3.0",
+		"zone.js": "~0.11.4"
+	},
+	"devDependencies": {
+		"@angular-devkit/build-angular": "~12.2.5",
+		"@angular-eslint/builder": "^12.3.1",
+		"@angular-eslint/eslint-plugin": "^12.3.1",
+		"@angular-eslint/eslint-plugin-template": "^12.3.1",
+		"@angular-eslint/schematics": "^12.3.1",
+		"@angular-eslint/template-parser": "^12.3.1",
+		"@angular/cli": "~12.2.5",
+		"@angular/compiler-cli": "~12.2.0",
+		"@types/d3": "^7.0.0",
+		"@types/node": "^16.9.0",
+		"@typescript-eslint/eslint-plugin": "^4.31.0",
+		"@typescript-eslint/parser": "^4.31.0",
+		"electron": "^13.3.0",
+		"electron-builder": "^22.11.7",
+		"eslint": "^7.32.0",
+		"eslint-plugin-import": "^2.24.2",
+		"eslint-plugin-jsdoc": "^36.1.0",
+		"eslint-plugin-prefer-arrow": "^1.2.3",
+		"typescript": "~4.3.5"
+	}
+}

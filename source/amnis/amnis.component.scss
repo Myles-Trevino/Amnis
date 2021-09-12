@@ -1,0 +1,66 @@
+/*
+	Copyright Myles Trevino
+	Licensed under the Apache License, Version 2.0
+	http://www.apache.org/licenses/LICENSE-2.0
+*/
+
+
+/* Container. */
+#amnis-container
+{
+	overflow: hidden;
+	width: 100vw;
+	height: 100vh;
+}
+
+
+/* Titlebar. */
+#amnis-titlebar-container
+{
+	height: var(--titlebar-height);
+	padding: var(--resize-region-size);
+	padding-bottom: 0;
+	background-color: var(--alternate-color);
+}
+
+#amnis-titlebar
+{
+	-webkit-app-region: drag;
+	display: flex;
+	justify-content: space-between;
+	height: 100%;
+	padding-bottom: var(--resize-region-size);
+
+	a
+	{
+		-webkit-app-region: no-drag;
+		font-size: 1rem;
+		text-decoration: none;
+		transition: opacity var(--regular-transition-duration);
+	}
+}
+
+.amnis-titlebar-buttons
+{
+	display: grid;
+	align-content: center;
+	gap: 0.5rem;
+	padding: 0 .25rem;
+}
+
+#amnis-navigation-buttons { grid-template-columns: repeat(3, min-content); }
+
+#amnis-window-control-buttons { grid-template-columns: repeat(2, min-content); }
+
+.amnis-window-control
+{
+	-webkit-app-region: no-drag;
+	cursor: pointer;
+	width: var(--titlebar-button-diameter);
+	height: var(--titlebar-button-diameter);
+	border-radius: calc(var(--titlebar-button-diameter) / 2);
+	transition: background-color var(--regular-transition-duration);
+	box-shadow: 0 0 0 var(--line-width) var(--text-color) inset;
+
+	&:hover { background-color: var(--text-color); }
+}
