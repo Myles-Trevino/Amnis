@@ -23,7 +23,7 @@ function createWindow()
 	// Create the window.
 	window = new Electron.BrowserWindow
 	({
-		width: 560, // width: 1200,
+		width: 560,
 		height: 560,
 		resizable: false,
 		frame: false,

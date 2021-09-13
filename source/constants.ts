@@ -5,9 +5,11 @@
 */
 
 
-export const version = '1.0.0';
-export const laventhUrl = 'https://laventh.com';
+export const version = '1.1.0';
+export const stateVersion = 1;
+export const minimumStateVersion = 1;
 
+export const laventhUrl = 'https://laventh.com';
 export const keys = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
 	'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 

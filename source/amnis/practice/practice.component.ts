@@ -51,8 +51,12 @@ export class PracticeComponent implements OnInit
 
 		// If this is the wrong character, set the wrong flag and return.
 		const currentCharacter = this.characters[this.characterIndex];
+
 		if(currentCharacter.character !== key)
 		{
+			// Ignore consecutive errors on the same letter.
+			if(currentCharacter.wrong) return;
+
 			++this.errors;
 			currentCharacter.wrong = true;
 			return;
@@ -103,6 +107,7 @@ export class PracticeComponent implements OnInit
 	// Initializer.
 	public ngOnInit(): void
 	{
+		this.state = this.stateService.state;
 		this.generateMap();
 		this.generateText();
 	}
@@ -133,10 +138,9 @@ export class PracticeComponent implements OnInit
 	{
 		this.text = '';
 
-		// If there is a focus key set, use words that contain it.
+		// Use words that contain the focus key.
 		let words: string[] | undefined = undefined;
-		if(this.state.focusKey)
-			words = this.wordMap.get(this.state.focusKey);
+		words = this.wordMap.get(this.state.focusKey);
 
 		// Otherwise use the full word list.
 		if(!words) words = Words;
@@ -219,26 +223,47 @@ export class PracticeComponent implements OnInit
 		this.state.averageWpm = averageWpm;
 
 		// Calculate the updated average timings.
-		let greatest = -1;
+		let least = Number.MAX_VALUE;
+		let greatest = Number.MIN_VALUE;
+		let worstKey = '';
 
-		for(const [key, timings] of this.state.keyTimings)
+		for(const key of Constants.keys)
 		{
+			// Calculate the average timing.
 			let average = 0;
-			for(const timing of timings) average += timing;
-			average /= timings.length;
+			const timings = this.state.keyTimings.get(key);
 
+			if(timings)
+			{
+				for(const timing of timings) average += timing;
+				average /= timings.length;
+			}
+
+			// Set the average timing and keep track
+			// of the least and greatest averages.
 			this.state.averageKeyTimings.set(key, average);
+
+			if(average < least) least = average;
 
 			if(average > greatest)
 			{
 				greatest = average;
-				this.state.focusKey = key;
+				worstKey = key;
 			}
 		}
 
 		// Normalize the average timings.
 		for(const [key, average] of this.state.averageKeyTimings)
-			this.state.averageKeyTimings.set(key, average/greatest);
+			this.state.averageKeyTimings.set(key, (average-least)/(greatest-least));
+
+		// Set the next focus key.
+		const nextUncalibratedKey = this.state.uncalibratedKeys.shift();
+		if(nextUncalibratedKey) this.state.focusKey = nextUncalibratedKey;
+		else
+		{
+			this.state.calibrated = true;
+			this.state.focusKey = worstKey;
+		}
 
 		// Save the state.
 		this.stateService.save();

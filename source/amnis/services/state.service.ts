@@ -38,11 +38,12 @@ export class StateService
 	{
 		const savedState = localStorage.getItem(Constants.stateKey);
 
-		// If state has been saved, restore it.
+		// If state has been saved, load it.
 		if(savedState)
 		{
+			// Parse.
 			/* eslint-disable */
-			this.state = JSON.parse(savedState, (key, value) =>
+			const loadedState = JSON.parse(savedState, (key, value) =>
 			{
 				if(typeof value === 'object' && value !== null)
 					if(value.type === 'Map') return new Map(value.data);
@@ -50,6 +51,10 @@ export class StateService
 				return value;
 			}) as Types.State;
 			/* eslint-enable */
+
+			// Only load the state if it meets the minimum version requirement.
+			if(loadedState.version >= Constants.minimumStateVersion)
+				this.state = loadedState;
 		}
 
 		// Initialize the state.

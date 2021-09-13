@@ -101,4 +101,10 @@
 
 
 /* Bottom status. */
+#practice-bottom
+{
+	display: grid;
+	grid-auto-flow: column;
+}
+
 #practice-bottom-status { justify-self: right; }
