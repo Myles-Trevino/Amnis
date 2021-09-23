@@ -11,3 +11,6 @@
 
 
 Improve your typing skills.
+
+
+![Amnis Preview](https://laventh.com/assets/software/2021/amnis/preview.jpg)
